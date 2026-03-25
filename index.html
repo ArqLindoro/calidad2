@@ -11,10 +11,10 @@
         h1 { font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 45px; }
         .step { display: none; } .step.active { display: block; animation: fadeIn 0.6s; }
         p { font-size: 1.1rem; margin-bottom: 30px; font-weight: 300; line-height: 1.4; }
-        .btn-opt { background: transparent; border: 1px solid #333; color: white; padding: 16px; width: 100%; margin-bottom: 12px; cursor: pointer; font-family: 'Montserrat'; transition: 0.3s; }
+        .btn-opt { background: transparent; border: 1px solid #333; color: white; padding: 16px; width: 100%; margin-bottom: 12px; cursor: pointer; font-family: 'Montserrat'; transition: 0.3s; font-size: 0.9rem; }
         .btn-opt:hover { border-color: var(--gold); color: var(--gold); background: rgba(197,160,89,0.05); }
         .scale { display: flex; justify-content: space-between; margin-bottom: 10px; }
-        .item { width: 48px; height: 48px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
+        .item { width: 45px; height: 45px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
         .item:hover { border-color: var(--gold); color: var(--gold); }
         .labels { display: flex; justify-content: space-between; font-size: 0.6rem; color: #666; text-transform: uppercase; margin-bottom: 25px; }
         #btn-wa { display: none; background: var(--gold); color: var(--dark); border: none; padding: 20px; width: 100%; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 20px; letter-spacing: 1px; animation: pulse 2s infinite; }
@@ -25,82 +25,108 @@
 <body>
 
 <div id="survey-card">
-    <h1>ARQ. DAVID LINDORO JUÁREZ<br><span style="font-size:0.5rem; color:#666;">CERTIFICACIÓN DE SERVICIO</span></h1>
+    <h1>ARQ. DAVID LINDORO JUÁREZ<br><span style="font-size:0.5rem; color:#666;">GESTIÓN DE CALIDAD</span></h1>
 
-    <div class="step active" id="s1">
-        <p>1. ¿Cómo califica la ejecución técnica del trabajo realizado?</p>
+    <div class="step active" id="s_inicio">
+        <p>Seleccione el servicio recibido:</p>
+        <button class="btn-opt" onclick="setFlow('proyecto')">PROYECTO ARQUITECTÓNICO</button>
+        <button class="btn-opt" onclick="setFlow('construccion')">CONSTRUCCIÓN DE OBRA</button>
+        <button class="btn-opt" onclick="setFlow('mantenimiento')">MANTENIMIENTO / ACABADOS</button>
+    </div>
+
+    <div class="step" id="s_proy_1">
+        <p>¿Qué tanto el diseño superó sus expectativas estéticas y funcionales?</p>
         <div class="scale">
-            <div class="item" onclick="next(1, 1)">1</div><div class="item" onclick="next(1, 2)">2</div><div class="item" onclick="next(1, 3)">3</div><div class="item" onclick="next(1, 4)">4</div><div class="item" onclick="next(1, 5)">5</div>
+            <div class="item" onclick="save('proy_estetica', 1, 's_proy_1', 's_proy_2')">1</div><div class="item" onclick="save('proy_estetica', 2, 's_proy_1', 's_proy_2')">2</div><div class="item" onclick="save('proy_estetica', 3, 's_proy_1', 's_proy_2')">3</div><div class="item" onclick="save('proy_estetica', 4, 's_proy_1', 's_proy_2')">4</div><div class="item" onclick="save('proy_estetica', 5, 's_proy_1', 's_proy_2')">5</div>
         </div>
-        <div class="labels"><span>Básica</span><span>Excelente</span></div>
+        <div class="labels"><span>Básico</span><span>Excepcional</span></div>
+    </div>
+    <div class="step" id="s_proy_2">
+        <p>¿La asesoría técnica le brindó seguridad legal y normativa?</p>
+        <button class="btn-opt" onclick="save('proy_legal', 'Sí', 's_proy_2', 's_final')">Sí, totalmente</button>
+        <button class="btn-opt" onclick="save('proy_legal', 'No', 's_proy_2', 's_final')">Podría mejorar</button>
     </div>
 
-    <div class="step" id="s2">
-        <p>2. ¿Considera que la intervención mejoró el estado o valor de su propiedad?</p>
-        <button class="btn-opt" onclick="next(2, 'Totalmente')">Totalmente de acuerdo</button>
-        <button class="btn-opt" onclick="next(2, 'Parcialmente')">Lo esperado</button>
-    </div>
-
-    <div class="step" id="s3">
-        <p>3. ¿Nivel de confianza en las soluciones y materiales aplicados?</p>
+    <div class="step" id="s_const_1">
+        <p>¿Calidad de los acabados y procesos constructivos?</p>
         <div class="scale">
-            <div class="item" onclick="next(3, 1)">1</div><div class="item" onclick="next(3, 2)">2</div><div class="item" onclick="next(3, 3)">3</div><div class="item" onclick="next(3, 4)">4</div><div class="item" onclick="next(3, 5)">5</div>
+            <div class="item" onclick="save('const_calidad', 1, 's_const_1', 's_const_2')">1</div><div class="item" onclick="save('const_calidad', 2, 's_const_1', 's_const_2')">2</div><div class="item" onclick="save('const_calidad', 3, 's_const_1', 's_const_2')">3</div><div class="item" onclick="save('const_calidad', 4, 's_const_1', 's_const_2')">4</div><div class="item" onclick="save('const_calidad', 5, 's_const_1', 's_const_2')">5</div>
         </div>
-        <div class="labels"><span>Dudosa</span><span>Plena Confianza</span></div>
+    </div>
+    <div class="step" id="s_const_2">
+        <p>¿Cumplimiento con los tiempos de entrega programados?</p>
+        <button class="btn-opt" onclick="save('const_tiempo', 'Excelente', 's_const_2', 's_final')">A tiempo</button>
+        <button class="btn-opt" onclick="save('const_tiempo', 'Retraso', 's_const_2', 's_final')">Hubo retrasos</button>
     </div>
 
-    <div class="step" id="s4">
-        <p>4. ¿Cómo califica la limpieza y el orden durante el servicio?</p>
+    <div class="step" id="s_mant_1">
+        <p>¿La solución técnica resolvió el problema (Imper, Yeso, etc.)?</p>
         <div class="scale">
-            <div class="item" onclick="next(4, 1)">1</div><div class="item" onclick="next(4, 2)">2</div><div class="item" onclick="next(4, 3)">3</div><div class="item" onclick="next(4, 4)">4</div><div class="item" onclick="next(4, 5)">5</div>
+            <div class="item" onclick="save('mant_efectividad', 1, 's_mant_1', 's_mant_2')">1</div><div class="item" onclick="save('mant_efectividad', 2, 's_mant_1', 's_mant_2')">2</div><div class="item" onclick="nextMant(3)">3</div><div class="item" onclick="nextMant(4)">4</div><div class="item" onclick="nextMant(5)">5</div>
         </div>
-        <div class="labels"><span>Desordenado</span><span>Impecable</span></div>
+        <div class="labels"><span>No del todo</span><span>Solución Total</span></div>
+    </div>
+    <div class="step" id="s_mant_2">
+        <p>¿Cómo califica el orden y la limpieza del personal?</p>
+        <div class="scale">
+            <div class="item" onclick="save('mant_limpieza', 1, 's_mant_2', 's_final')">1</div><div class="item" onclick="save('mant_limpieza', 2, 's_mant_2', 's_final')">2</div><div class="item" onclick="save('mant_limpieza', 3, 's_mant_2', 's_final')">3</div><div class="item" onclick="save('mant_limpieza', 4, 's_mant_2', 's_final')">4</div><div class="item" onclick="save('mant_limpieza', 5, 's_mant_2', 's_final')">5</div>
+        </div>
+        <div class="labels"><span>Descuidado</span><span>Impecable</span></div>
     </div>
 
-    <div class="step" id="s5">
-        <p>5. ¿Volvería a contratar o recomendar nuestros servicios?</p>
-        <button class="btn-opt" onclick="finish(5, 'Sí')">Definitivamente sí</button>
-        <button class="btn-opt" onclick="finish(5, 'Tal vez')">Probablemente</button>
+    <div class="step" id="s_final">
+        <p>¿Recomendaría nuestros servicios profesionales?</p>
+        <button class="btn-opt" onclick="finish('Definitivamente')">Definitivamente sí</button>
+        <button class="btn-opt" onclick="finish('No por ahora')">No por ahora</button>
     </div>
 
     <div id="final-area" style="display:none;">
-        <h2 style="color:var(--gold); font-weight:300; font-size:1.2rem;">VALIDACIÓN COMPLETADA</h2>
-        <p style="font-size:0.8rem; color:#888;">Para enviar el reporte final directamente al Arquitecto, presione el botón inferior:</p>
-        <button id="btn-wa" onclick="sendWA()">NOTIFICAR POR WHATSAPP</button>
+        <h2 style="color:var(--gold); font-weight:300; font-size:1.2rem;">REPORTE LISTO</h2>
+        <p style="font-size:0.8rem; color:#888;">Presione para validar su evaluación con el Arq. Lindoro:</p>
+        <button id="btn-wa" onclick="sendWA()">ENVIAR POR WHATSAPP</button>
     </div>
 </div>
 
 <script>
-    let res = {};
+    let res = { servicio: '' };
     const TEL = "5212221774020"; 
     const G_URL = "https://script.google.com/macros/s/AKfycbyk0-xAuRuSQ4IifXwr8rwPdv3KY_haCWeCarmDpRhlSakJJHbJV5cOMbIwjkzxXnVD/exec"; 
 
-    function next(s, v) {
-        res['p'+s] = v;
-        document.getElementById('s'+s).classList.remove('active');
-        document.getElementById('s'+(s+1)).classList.add('active');
+    function setFlow(tipo) {
+        res.servicio = tipo.toUpperCase();
+        document.getElementById('s_inicio').classList.remove('active');
+        if(tipo === 'proyecto') document.getElementById('s_proy_1').classList.add('active');
+        if(tipo === 'construccion') document.getElementById('s_const_1').classList.add('active');
+        if(tipo === 'mantenimiento') document.getElementById('s_mant_1').classList.add('active');
     }
 
-    function finish(s, v) {
-        res['p'+s] = v;
-        document.getElementById('s5').classList.remove('active');
+    function save(key, val, current, next) {
+        res[key] = val;
+        document.getElementById(current).classList.remove('active');
+        document.getElementById(next).classList.add('active');
+    }
+    
+    // Función especial para mantenimiento para no repetir código
+    function nextMant(val) { save('mant_efectividad', val, 's_mant_1', 's_mant_2'); }
+
+    function finish(val) {
+        res.recomendacion = val;
+        document.getElementById('s_final').classList.remove('active');
         document.getElementById('final-area').style.display = 'block';
         document.getElementById('btn-wa').style.display = 'block';
-        
-        // Guardar en Excel (Silencioso)
         fetch(G_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(res) });
     }
 
     function sendWA() {
-        let msg = `*REPORTE DE SERVICIO - ARQ. LINDORO*%0A` +
-                  `------------------------------%0A` +
-                  `1. Ejecución: ${res.p1}/5%0A` +
-                  `2. Valor/Estado: ${res.p2}%0A` +
-                  `3. Confianza: ${res.p3}/5%0A` +
-                  `4. Orden: ${res.p4}/5%0A` +
-                  `5. Recontrata: ${res.p5}`;
+        let msg = `*EVALUACIÓN DE CALIDAD - ARQ. LINDORO*%0A` +
+                  `SERVICIO: ${res.servicio}%0A` +
+                  `------------------------------%0A`;
         
-        window.open(`https://api.whatsapp.com/send?phone=${TEL}&text=${msg}`, '_blank');
+        for (let key in res) {
+            if(key !== 'servicio') msg += `• ${key}: ${res[key]}%0A`;
+        }
+        
+        window.open(`https://wa.me/${TEL}?text=${msg}`, '_blank');
     }
 </script>
 </body>
