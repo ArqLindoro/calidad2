@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calidad | Arq. David Lindoro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #c5a059; --dark: #121212; --text: #e0e0e0; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--dark); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        #survey-card { width: 100%; max-width: 420px; padding: 40px; border-left: 3px solid var(--gold); background: #1a1a1a; box-shadow: 0 10px 40px rgba(0,0,0,0.6); text-align: center; }
+        h1 { font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 45px; }
+        .step { display: none; } .step.active { display: block; animation: fadeIn 0.6s; }
+        p { font-size: 1.1rem; margin-bottom: 30px; font-weight: 300; line-height: 1.4; }
+        .btn-opt { background: transparent; border: 1px solid #333; color: white; padding: 16px; width: 100%; margin-bottom: 12px; cursor: pointer; font-family: 'Montserrat'; transition: 0.3s; }
+        .btn-opt:hover { border-color: var(--gold); color: var(--gold); background: rgba(197,160,89,0.05); }
+        .scale { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .item { width: 48px; height: 48px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
+        .item:hover { border-color: var(--gold); color: var(--gold); }
+        .labels { display: flex; justify-content: space-between; font-size: 0.6rem; color: #666; text-transform: uppercase; margin-bottom: 25px; }
+        #btn-wa { display: none; background: var(--gold); color: var(--dark); border: none; padding: 20px; width: 100%; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 20px; letter-spacing: 1px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div id="survey-card">
+    <h1>ARQ. DAVID LINDORO JUÁREZ<br><span style="font-size:0.5rem; color:#666;">CERTIFICACIÓN DE SERVICIO</span></h1>
+
+    <div class="step active" id="s1">
+        <p>1. ¿Cómo califica la ejecución técnica del trabajo realizado?</p>
+        <div class="scale">
+            <div class="item" onclick="next(1, 1)">1</div><div class="item" onclick="next(1, 2)">2</div><div class="item" onclick="next(1, 3)">3</div><div class="item" onclick="next(1, 4)">4</div><div class="item" onclick="next(1, 5)">5</div>
+        </div>
+        <div class="labels"><span>Básica</span><span>Excelente</span></div>
+    </div>
+
+    <div class="step" id="s2">
+        <p>2. ¿Considera que la intervención mejoró el estado o valor de su propiedad?</p>
+        <button class="btn-opt" onclick="next(2, 'Totalmente')">Totalmente de acuerdo</button>
+        <button class="btn-opt" onclick="next(2, 'Parcialmente')">Lo esperado</button>
+    </div>
+
+    <div class="step" id="s3">
+        <p>3. ¿Nivel de confianza en las soluciones y materiales aplicados?</p>
+        <div class="scale">
+            <div class="item" onclick="next(3, 1)">1</div><div class="item" onclick="next(3, 2)">2</div><div class="item" onclick="next(3, 3)">3</div><div class="item" onclick="next(3, 4)">4</div><div class="item" onclick="next(3, 5)">5</div>
+        </div>
+        <div class="labels"><span>Dudosa</span><span>Plena Confianza</span></div>
+    </div>
+
+    <div class="step" id="s4">
+        <p>4. ¿Cómo califica la limpieza y el orden durante el servicio?</p>
+        <div class="scale">
+            <div class="item" onclick="next(4, 1)">1</div><div class="item" onclick="next(4, 2)">2</div><div class="item" onclick="next(4, 3)">3</div><div class="item" onclick="next(4, 4)">4</div><div class="item" onclick="next(4, 5)">5</div>
+        </div>
+        <div class="labels"><span>Desordenado</span><span>Impecable</span></div>
+    </div>
+
+    <div class="step" id="s5">
+        <p>5. ¿Volvería a contratar o recomendar nuestros servicios?</p>
+        <button class="btn-opt" onclick="finish(5, 'Sí')">Definitivamente sí</button>
+        <button class="btn-opt" onclick="finish(5, 'Tal vez')">Probablemente</button>
+    </div>
+
+    <div id="final-area" style="display:none;">
+        <h2 style="color:var(--gold); font-weight:300; font-size:1.2rem;">VALIDACIÓN COMPLETADA</h2>
+        <p style="font-size:0.8rem; color:#888;">Para enviar el reporte final directamente al Arquitecto, presione el botón inferior:</p>
+        <button id="btn-wa" onclick="sendWA()">NOTIFICAR POR WHATSAPP</button>
+    </div>
+</div>
+
+<script>
+    let res = {};
+    const TEL = "5212221774020"; 
+    const G_URL = "https://script.google.com/macros/s/AKfycbyk0-xAuRuSQ4IifXwr8rwPdv3KY_haCWeCarmDpRhlSakJJHbJV5cOMbIwjkzxXnVD/exec"; 
+
+    function next(s, v) {
+        res['p'+s] = v;
+        document.getElementById('s'+s).classList.remove('active');
+        document.getElementById('s'+(s+1)).classList.add('active');
+    }
+
+    function finish(s, v) {
+        res['p'+s] = v;
+        document.getElementById('s5').classList.remove('active');
+        document.getElementById('final-area').style.display = 'block';
+        document.getElementById('btn-wa').style.display = 'block';
+        
+        // Guardar en Excel (Silencioso)
+        fetch(G_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(res) });
+    }
+
+    function sendWA() {
+        let msg = `*REPORTE DE SERVICIO - ARQ. LINDORO*%0A` +
+                  `------------------------------%0A` +
+                  `1. Ejecución: ${res.p1}/5%0A` +
+                  `2. Valor/Estado: ${res.p2}%0A` +
+                  `3. Confianza: ${res.p3}/5%0A` +
+                  `4. Orden: ${res.p4}/5%0A` +
+                  `5. Recontrata: ${res.p5}`;
+        
+        window.open(`https://api.whatsapp.com/send?phone=${TEL}&text=${msg}`, '_blank');
+    }
+</script>
+</body>
+</html>
