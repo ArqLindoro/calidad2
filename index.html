@@ -25,79 +25,76 @@
 <body>
 
 <div id="survey-card">
-    <h1>ARQ. DAVID LINDORO JUÁREZ<br><span style="font-size:0.5rem; color:#666;">GESTIÓN DE CALIDAD</span></h1>
+    <h1>ARQ. DAVID LINDORO JUÁREZ<br><span style="font-size:0.5rem; color:#666;">BUSINESS QUALITY REPORT</span></h1>
 
     <div class="step active" id="s_inicio">
         <p>Seleccione el servicio recibido:</p>
-        <button class="btn-opt" onclick="setFlow('proyecto')">PROYECTO ARQUITECTÓNICO</button>
-        <button class="btn-opt" onclick="setFlow('construccion')">CONSTRUCCIÓN DE OBRA</button>
-        <button class="btn-opt" onclick="setFlow('mantenimiento')">MANTENIMIENTO / ACABADOS</button>
+        <button class="btn-opt" onclick="setFlow('Proyecto')">PROYECTO ARQUITECTÓNICO</button>
+        <button class="btn-opt" onclick="setFlow('Construccion')">CONSTRUCCIÓN DE OBRA</button>
+        <button class="btn-opt" onclick="setFlow('Mantenimiento')">MANTENIMIENTO / ACABADOS</button>
     </div>
 
     <div class="step" id="s_proy_1">
-        <p>¿Qué tanto el diseño superó sus expectativas estéticas y funcionales?</p>
+        <p>¿El diseño superó sus expectativas estéticas y funcionales?</p>
         <div class="scale">
-            <div class="item" onclick="save('proy_estetica', 1, 's_proy_1', 's_proy_2')">1</div><div class="item" onclick="save('proy_estetica', 2, 's_proy_1', 's_proy_2')">2</div><div class="item" onclick="save('proy_estetica', 3, 's_proy_1', 's_proy_2')">3</div><div class="item" onclick="save('proy_estetica', 4, 's_proy_1', 's_proy_2')">4</div><div class="item" onclick="save('proy_estetica', 5, 's_proy_1', 's_proy_2')">5</div>
+            <div class="item" onclick="save('Diseño', 1, 's_proy_1', 's_proy_2')">1</div><div class="item" onclick="save('Diseño', 2, 's_proy_1', 's_proy_2')">2</div><div class="item" onclick="save('Diseño', 3, 's_proy_1', 's_proy_2')">3</div><div class="item" onclick="save('Diseño', 4, 's_proy_1', 's_proy_2')">4</div><div class="item" onclick="save('Diseño', 5, 's_proy_1', 's_proy_2')">5</div>
         </div>
-        <div class="labels"><span>Básico</span><span>Excepcional</span></div>
     </div>
     <div class="step" id="s_proy_2">
-        <p>¿La asesoría técnica le brindó seguridad legal y normativa?</p>
-        <button class="btn-opt" onclick="save('proy_legal', 'Sí', 's_proy_2', 's_final')">Sí, totalmente</button>
-        <button class="btn-opt" onclick="save('proy_legal', 'No', 's_proy_2', 's_final')">Podría mejorar</button>
+        <p>¿La asesoría técnica le brindó seguridad normativa?</p>
+        <button class="btn-opt" onclick="save('Asesoría', 'Excelente', 's_proy_2', 's_final')">Sí, totalmente</button>
+        <button class="btn-opt" onclick="save('Asesoría', 'Regular', 's_proy_2', 's_final')">Podría mejorar</button>
     </div>
 
     <div class="step" id="s_const_1">
-        <p>¿Calidad de los acabados y procesos constructivos?</p>
+        <p>¿Calidad de los procesos constructivos y materiales?</p>
         <div class="scale">
-            <div class="item" onclick="save('const_calidad', 1, 's_const_1', 's_const_2')">1</div><div class="item" onclick="save('const_calidad', 2, 's_const_1', 's_const_2')">2</div><div class="item" onclick="save('const_calidad', 3, 's_const_1', 's_const_2')">3</div><div class="item" onclick="save('const_calidad', 4, 's_const_1', 's_const_2')">4</div><div class="item" onclick="save('const_calidad', 5, 's_const_1', 's_const_2')">5</div>
+            <div class="item" onclick="save('Calidad_Obra', 1, 's_const_1', 's_const_2')">1</div><div class="item" onclick="save('Calidad_Obra', 2, 's_const_1', 's_const_2')">2</div><div class="item" onclick="save('Calidad_Obra', 3, 's_const_1', 's_const_2')">3</div><div class="item" onclick="save('Calidad_Obra', 4, 's_const_1', 's_const_2')">4</div><div class="item" onclick="save('Calidad_Obra', 5, 's_const_1', 's_const_2')">5</div>
         </div>
     </div>
     <div class="step" id="s_const_2">
-        <p>¿Cumplimiento con los tiempos de entrega programados?</p>
-        <button class="btn-opt" onclick="save('const_tiempo', 'Excelente', 's_const_2', 's_final')">A tiempo</button>
-        <button class="btn-opt" onclick="save('const_tiempo', 'Retraso', 's_const_2', 's_final')">Hubo retrasos</button>
+        <p>¿Cumplimiento con los tiempos de entrega?</p>
+        <button class="btn-opt" onclick="save('Tiempos', 'A tiempo', 's_const_2', 's_final')">A tiempo</button>
+        <button class="btn-opt" onclick="save('Tiempos', 'Retraso', 's_const_2', 's_final')">Hubo retrasos</button>
     </div>
 
     <div class="step" id="s_mant_1">
-        <p>¿La solución técnica resolvió el problema (Imper, Yeso, etc.)?</p>
+        <p>¿La solución técnica resolvió el problema (Imper, Pintura, etc.)?</p>
         <div class="scale">
-            <div class="item" onclick="save('mant_efectividad', 1, 's_mant_1', 's_mant_2')">1</div><div class="item" onclick="save('mant_efectividad', 2, 's_mant_1', 's_mant_2')">2</div><div class="item" onclick="nextMant(3)">3</div><div class="item" onclick="nextMant(4)">4</div><div class="item" onclick="nextMant(5)">5</div>
+            <div class="item" onclick="save('Solución', 1, 's_mant_1', 's_mant_2')">1</div><div class="item" onclick="save('Solución', 2, 's_mant_1', 's_mant_2')">2</div><div class="item" onclick="save('Solución', 3, 's_mant_1', 's_mant_2')">3</div><div class="item" onclick="save('Solución', 4, 's_mant_1', 's_mant_2')">4</div><div class="item" onclick="save('Solución', 5, 's_mant_1', 's_mant_2')">5</div>
         </div>
-        <div class="labels"><span>No del todo</span><span>Solución Total</span></div>
     </div>
     <div class="step" id="s_mant_2">
         <p>¿Cómo califica el orden y la limpieza del personal?</p>
         <div class="scale">
-            <div class="item" onclick="save('mant_limpieza', 1, 's_mant_2', 's_final')">1</div><div class="item" onclick="save('mant_limpieza', 2, 's_mant_2', 's_final')">2</div><div class="item" onclick="save('mant_limpieza', 3, 's_mant_2', 's_final')">3</div><div class="item" onclick="save('mant_limpieza', 4, 's_mant_2', 's_final')">4</div><div class="item" onclick="save('mant_limpieza', 5, 's_mant_2', 's_final')">5</div>
+            <div class="item" onclick="save('Limpieza', 1, 's_mant_2', 's_final')">1</div><div class="item" onclick="save('Limpieza', 2, 's_mant_2', 's_final')">2</div><div class="item" onclick="save('Limpieza', 3, 's_mant_2', 's_final')">3</div><div class="item" onclick="save('Limpieza', 4, 's_mant_2', 's_final')">4</div><div class="item" onclick="save('Limpieza', 5, 's_mant_2', 's_final')">5</div>
         </div>
-        <div class="labels"><span>Descuidado</span><span>Impecable</span></div>
     </div>
 
     <div class="step" id="s_final">
         <p>¿Recomendaría nuestros servicios profesionales?</p>
-        <button class="btn-opt" onclick="finish('Definitivamente')">Definitivamente sí</button>
-        <button class="btn-opt" onclick="finish('No por ahora')">No por ahora</button>
+        <button class="btn-opt" onclick="finish('Sí')">Definitivamente sí</button>
+        <button class="btn-opt" onclick="finish('Tal vez')">Probablemente</button>
     </div>
 
     <div id="final-area" style="display:none;">
-        <h2 style="color:var(--gold); font-weight:300; font-size:1.2rem;">REPORTE LISTO</h2>
-        <p style="font-size:0.8rem; color:#888;">Presione para validar su evaluación con el Arq. Lindoro:</p>
-        <button id="btn-wa" onclick="sendWA()">ENVIAR POR WHATSAPP</button>
+        <h2 style="color:var(--gold); font-weight:300; font-size:1.2rem;">VALIDACIÓN LISTA</h2>
+        <p style="font-size:0.8rem; color:#888;">Toque el botón para enviar el reporte final:</p>
+        <button id="btn-wa" onclick="sendWA()">ENVIAR A WHATSAPP BUSINESS</button>
     </div>
 </div>
 
 <script>
-    let res = { servicio: '' };
+    let res = { Servicio: '' };
     const TEL = "5212221774020"; 
     const G_URL = "https://script.google.com/macros/s/AKfycbyk0-xAuRuSQ4IifXwr8rwPdv3KY_haCWeCarmDpRhlSakJJHbJV5cOMbIwjkzxXnVD/exec"; 
 
     function setFlow(tipo) {
-        res.servicio = tipo.toUpperCase();
+        res.Servicio = tipo;
         document.getElementById('s_inicio').classList.remove('active');
-        if(tipo === 'proyecto') document.getElementById('s_proy_1').classList.add('active');
-        if(tipo === 'construccion') document.getElementById('s_const_1').classList.add('active');
-        if(tipo === 'mantenimiento') document.getElementById('s_mant_1').classList.add('active');
+        if(tipo === 'Proyecto') document.getElementById('s_proy_1').classList.add('active');
+        if(tipo === 'Construccion') document.getElementById('s_const_1').classList.add('active');
+        if(tipo === 'Mantenimiento') document.getElementById('s_mant_1').classList.add('active');
     }
 
     function save(key, val, current, next) {
@@ -105,12 +102,9 @@
         document.getElementById(current).classList.remove('active');
         document.getElementById(next).classList.add('active');
     }
-    
-    // Función especial para mantenimiento para no repetir código
-    function nextMant(val) { save('mant_efectividad', val, 's_mant_1', 's_mant_2'); }
 
     function finish(val) {
-        res.recomendacion = val;
+        res.Recomienda = val;
         document.getElementById('s_final').classList.remove('active');
         document.getElementById('final-area').style.display = 'block';
         document.getElementById('btn-wa').style.display = 'block';
@@ -118,14 +112,16 @@
     }
 
     function sendWA() {
-        let msg = `*EVALUACIÓN DE CALIDAD - ARQ. LINDORO*%0A` +
-                  `SERVICIO: ${res.servicio}%0A` +
-                  `------------------------------%0A`;
+        // Mensaje formateado para lectura rápida en Business
+        let msg = `*NUEVA EVALUACIÓN - ARQ. LINDORO*%0A` +
+                  `━━━━━━━━━━━━━━━━━━━%0A` +
+                  `*CATEGORÍA:* ${res.Servicio}%0A` +
+                  `━━━━━━━━━━━━━━━━━━━%0A`;
         
         for (let key in res) {
-            if(key !== 'servicio') msg += `• ${key}: ${res[key]}%0A`;
+            if(key !== 'Servicio') msg += `• *${key}:* ${res[key]}%0A`;
         }
-        
+
         window.open(`https://wa.me/${TEL}?text=${msg}`, '_blank');
     }
 </script>
