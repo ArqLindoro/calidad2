@@ -127,4 +127,34 @@
         res.Servicio = tipo;
         document.getElementById('s_inicio').classList.remove('active');
         if(tipo === 'Proyecto') document.getElementById('s_proy_1').classList.add('active');
-        if(tipo === 'Construccion') document.getElementById('s_const_1').classList.add('active
+        if(tipo === 'Construccion') document.getElementById('s_const_1').classList.add('active');
+        if(tipo === 'Mantenimiento') document.getElementById('s_mant_1').classList.add('active');
+    }
+
+    function save(key, val, current, next) {
+        res[key] = val;
+        document.getElementById(current).classList.remove('active');
+        document.getElementById(next).classList.add('active');
+    }
+
+    function finish(val) {
+        res.Recomienda = val;
+        document.getElementById('s_final').classList.remove('active');
+        document.getElementById('final-area').style.display = 'block';
+        document.getElementById('btn-wa').style.display = 'block';
+        fetch(G_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(res) });
+    }
+
+    function sendWA() {
+        let msg = `*NUEVA EVALUACIÓN - ARQ. LINDORO*%0A` +
+                  `━━━━━━━━━━━━━━━━━━━%0A` +
+                  `*CATEGORÍA:* ${res.Servicio}%0A` +
+                  `━━━━━━━━━━━━━━━━━━━%0A`;
+        for (let key in res) {
+            if(key !== 'Servicio') msg += `• *${key}:* ${res[key]}%0A`;
+        }
+        window.open(`https://wa.me/${TEL}?text=${msg}`, '_blank');
+    }
+</script>
+</body>
+</html>
